@@ -13,9 +13,9 @@
 		C71E25CD1A1F5915008BEB06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C71E25CC1A1F5915008BEB06 /* Images.xcassets */; };
 		C71E25D01A1F5915008BEB06 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71E25CE1A1F5915008BEB06 /* LaunchScreen.xib */; };
 		C71E25DC1A1F5915008BEB06 /* beer73Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25DB1A1F5915008BEB06 /* beer73Tests.swift */; };
+		C724E2281A1FBBB700DF4D84 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C724E2271A1FBBB700DF4D84 /* opencv2.framework */; };
 		C733ACA71A1F777600AC7135 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C733ACA61A1F777600AC7135 /* ResultViewController.swift */; };
 		C733ACAA1A1F7E8000AC7135 /* ScoreCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */; };
-		C733ACAC1A1F872100AC7135 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C733ACAB1A1F872100AC7135 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,10 +39,10 @@
 		C71E25D51A1F5915008BEB06 /* beer73Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = beer73Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71E25DA1A1F5915008BEB06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C71E25DB1A1F5915008BEB06 /* beer73Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beer73Tests.swift; sourceTree = "<group>"; };
+		C724E2271A1FBBB700DF4D84 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		C733ACA61A1F777600AC7135 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		C733ACA81A1F7E7F00AC7135 /* beer73-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "beer73-Bridging-Header.h"; sourceTree = "<group>"; };
 		C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreCalculator.mm; sourceTree = "<group>"; };
-		C733ACAB1A1F872100AC7135 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = System/Library/Frameworks/opencv2.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C733ACAC1A1F872100AC7135 /* opencv2.framework in Frameworks */,
+				C724E2281A1FBBB700DF4D84 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +67,7 @@
 		C71E25B71A1F5915008BEB06 = {
 			isa = PBXGroup;
 			children = (
-				C733ACAB1A1F872100AC7135 /* opencv2.framework */,
+				C724E2271A1FBBB700DF4D84 /* opencv2.framework */,
 				C71E25C21A1F5915008BEB06 /* beer73 */,
 				C71E25D81A1F5915008BEB06 /* beer73Tests */,
 				C71E25C11A1F5915008BEB06 /* Products */,
@@ -353,7 +353,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/akihito/Develop/ios,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = beer73/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -372,7 +372,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/akihito/Develop/ios,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = beer73/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
