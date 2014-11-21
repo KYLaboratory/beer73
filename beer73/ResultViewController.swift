@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ResultViewController.swift
 //  beer73
 //
 //  Created by akihito on 2014/11/21.
@@ -8,18 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ResultViewController : UIViewController {
+    
+    var cameraImage : UIImage!
+    var score = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
