@@ -12,19 +12,47 @@ import AVFoundation
 
 class CameraViewController: UIViewController {
     
-    var camera : Camera!
+    // セッション.
+    var mySession : AVCaptureSession!
+    // デバイス.
+    var myDevice : AVCaptureDevice!
+    // 画像のアウトプット.
+    var myImageOutput : AVCaptureStillImageOutput!
     
-    var myImage : UIImage!
+    var myImage : UIImage?
     var score : Int32 = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        camera = Camera()
+        // セッションの作成.
+        mySession = AVCaptureSession()
+        
+        // デバイス一覧の取得.
+        let devices = AVCaptureDevice.devices()
+        
+        // バックカメラをmyDeviceに格納.
+        for device in devices{
+            if(device.position == AVCaptureDevicePosition.Back){
+                myDevice = device as AVCaptureDevice
+            }
+        }
+        
+        // バックカメラからVideoInputを取得.
+        let videoInput = AVCaptureDeviceInput.deviceInputWithDevice(myDevice, error: nil) as AVCaptureDeviceInput
+        
+        // セッションに追加.
+        mySession.addInput(videoInput)
+        
+        // 出力先を生成.
+        myImageOutput = AVCaptureStillImageOutput()
+        
+        // セッションに追加.
+        mySession.addOutput(myImageOutput)
         
         // 画像を表示するレイヤーを生成.
-        let myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(camera.mySession) as AVCaptureVideoPreviewLayer
+        let myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(mySession) as AVCaptureVideoPreviewLayer
         myVideoLayer.frame = self.view.bounds
         myVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
@@ -32,7 +60,7 @@ class CameraViewController: UIViewController {
         self.view.layer.addSublayer(myVideoLayer)
         
         // セッション開始.
-        camera.mySession.startRunning()
+        mySession.startRunning()
         
         // UIボタンを作成.
         let myButton = UIButton(frame: CGRectMake(0,0,120,50))
@@ -84,22 +112,33 @@ class CameraViewController: UIViewController {
     
     // ボタンイベント.
     func onClickMyButton(sender: UIButton){
-        myImage = camera.captureImage()
+        // ビデオ出力に接続.
+        let myVideoConnection = myImageOutput.connectionWithMediaType(AVMediaTypeVideo)
         
-        self.score = ScoreCalculator.calcScore(self.myImage)
-        
-        // アルバムに追加.
-        //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
-        self.score = 100
-        
-        if self.score < 0
-        {
-            self.showAlert()
-        }
-        else
-        {
-            self.performSegueWithIdentifier("shutter",sender: nil)
-        }
+        // 接続から画像を取得.
+        myImageOutput.captureStillImageAsynchronouslyFromConnection(myVideoConnection, completionHandler: {(imageDataBuffer, error) -> Void in
+            
+            // 取得したImageのDataBufferをJpegに変換.
+            let myImageData : NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer)
+            
+            // JpegからUIIMageを作成.
+            self.myImage = UIImage(data: myImageData)
+            
+            self.score = ScoreCalculator.calcScore(self.myImage)
+            
+            // アルバムに追加.
+            //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
+            self.score = 100
+            
+            if self.score < 0
+            {
+                self.showAlert()
+            }
+            else
+            {
+                self.performSegueWithIdentifier("shutter",sender: nil)
+            }
+        })
     }
 }
 
