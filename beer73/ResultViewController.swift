@@ -23,6 +23,7 @@ class ResultViewController : UIViewController {
         super.viewDidLoad()
         
         //cameraImage = UIImage(named: "beer.JPG")
+        score = 100;
         
         // UIImageViewを生成する.
         var myImageView = UIImageView()
@@ -135,7 +136,7 @@ class ResultViewController : UIViewController {
         // ---------
         
         // 背景色を黄色にする.
-        self.view.backgroundColor = UIColor.yellowColor()
+        //self.view.backgroundColor = UIColor.yellowColor()
         
         // ProgressViewを作成する.
         var myProgressView: UIProgressView = UIProgressView(frame: CGRectMake(0, 0, 200, 10))
@@ -146,10 +147,10 @@ class ResultViewController : UIViewController {
         myProgressView.layer.position = CGPoint(x: self.view.frame.width/2, y: 200)
         
         // バーの高さを設定する(横に1.0倍,縦に2.0倍).
-        myProgressView.transform = CGAffineTransformMakeScale(1.0, 2.0)
+        myProgressView.transform = CGAffineTransformMakeScale(1.0, 10.0)
         
         // 進捗具合を設定する(0.0~1.0).
-        myProgressView.progress = 0.3
+        myProgressView.progress = 0.7
         
         // アニメーションを付ける.
         myProgressView.setProgress(5.0, animated: true)

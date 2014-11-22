@@ -88,45 +88,18 @@ class CameraViewController: UIViewController {
         
         self.score = ScoreCalculator.calcScore(self.myImage)
         
-        // 接続から画像を取得.
-        self.myImageOutput.captureStillImageAsynchronouslyFromConnection(myVideoConnection,
-            completionHandler:
-            {
-                (imageDataBuffer, error) -> Void in
-            
-                // 取得したImageのDataBufferをJpegに変換.
-                let myImageData : NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer)
-                
-                // JpegからUIIMageを作成.
-                self.myImage = UIImage(data: myImageData)!
-                
-                //self.score = ScoreCalculator.calcScore(self.myImage)
-            
-                // アルバムに追加.
-                //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
-                
-                if self.score < 0
-                {
-                    // UIAlertControllerを作成する.
-                    let myAlert = UIAlertController(title: "認識エラー", message: "ビールが見えません！", preferredStyle: .Alert)
-                    
-                    // OKのアクションを作成する.
-                    let myOkAction = UIAlertAction(title: "撮り直す", style: .Default) { action in
-                        println("Action OK!!")
-                    }
-                    
-                    // OKのActionを追加する.
-                    myAlert.addAction(myOkAction)
-                    
-                    // UIAlertを発動する.
-                    self.presentViewController(myAlert, animated: true, completion: nil)
-                }
-                else
-                {
-                    self.performSegueWithIdentifier("shutter",sender: nil)
-                }
-            }
-        )
+        // アルバムに追加.
+        //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
+        self.score = 100
+        
+        if self.score < 0
+        {
+            self.showAlert()
+        }
+        else
+        {
+            self.performSegueWithIdentifier("shutter",sender: nil)
+        }
     }
 }
 
