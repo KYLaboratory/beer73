@@ -13,31 +13,35 @@ class ResultViewController : UIViewController {
     var cameraImage : UIImage!
     var score : Int32 =  -1
     
-    // 画像を設定する.
-    //var cameraImage = UIImage(named: "beer.JPG")
-
-    // ImageViewを.定義する.
-    //var myImageView: UIImageView!
+    var myProgressView : UIProgressView!
+    var pernum : Float32 = 0.0;
+    
+    var scoreShowFlag : Int32 = 1
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //cameraImage = UIImage(named: "beer.JPG")
-        score = 100;
+        // timer 最初の引数でスピード決定する
+        var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
+        
+        ///////////////////////////
+        cameraImage = UIImage(named: "beer.JPG")
+        score = 85;
         
         // UIImageViewを生成する.
         var myImageView = UIImageView()
         
         // myImageViewのimageにmyImageを設定する.
         myImageView.image = cameraImage
-        
+   
         // frameの値を設定する.
         myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
         
         self.view.addSubview(myImageView)
-        
+  
+        /*
         // -----
-        
         // 画像を設定する.
         var myImage : UIImage!
         myImage = UIImage(named: "beer.JPG")
@@ -96,12 +100,56 @@ class ResultViewController : UIViewController {
         
         // Viewに追加する.
         self.view.addSubview(myReverseView)
-        
+        */
         // -----
         
+        
+        // ---------
+        
+        // 背景色を黄色にする.
+        //self.view.backgroundColor = UIColor.yellowColor()
+        
+        // ProgressViewを作成する.
+        //var myProgressView: UIProgressView = UIProgressView(frame: CGRectMake(0, 0, 200, 10))
+        myProgressView = UIProgressView(frame: CGRectMake(0, 0, 200, 10))
+        myProgressView.progressTintColor = UIColor.greenColor()
+        myProgressView.trackTintColor = UIColor.whiteColor()
+        
+        // 座標を設定する.
+        myProgressView.layer.position = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height * 3/4)
+        
+        // バーの高さを設定する(横に1.0倍,縦に10.0倍).
+        myProgressView.transform = CGAffineTransformMakeScale(1.0, 10.0)
+        
+        // 進捗具合を設定する(0.0~1.0).
+        myProgressView.progress = 0.0
+        
+        // Viewに追加する.
+        self.view.addSubview(myProgressView)
+        
+    }
+    
+    
+    func update() {
+        // バーにアニメーションを付ける.
+        if( Float32(score) * 0.01 > pernum ){
+            pernum += Float32(score) * 0.01;
+            myProgressView.setProgress(pernum, animated: true)
+        }else{
+            self.showScore()
+            scoreShowFlag *= -1
+        }
+    }
+
+    func showScore(){
+        self.showScoreLabel()
+        self.showScoreBackView()
+    }
+    
+    func showScoreLabel(){
         // Labelを作成.
         let myLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
-
+        
         // 背景をオレンジ色にする.
         myLabel.backgroundColor = UIColor.orangeColor()
         
@@ -113,7 +161,7 @@ class ResultViewController : UIViewController {
         
         // Labelに文字を代入.
         let scoretext = score
-        myLabel.text = "\(scoretext) 点 wwwww"
+        myLabel.text = "\(scoretext) 点 death wwwwwww"
         
         // 文字の色を白にする.
         myLabel.textColor = UIColor.whiteColor()
@@ -125,41 +173,38 @@ class ResultViewController : UIViewController {
         myLabel.textAlignment = NSTextAlignment.Center
         
         // 配置する座標を設定する.
-        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2,y: 200)
+        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
         
         // Viewの背景色を青にする.
-        self.view.backgroundColor = UIColor.cyanColor()
+        //self.view.backgroundColor = UIColor.cyanColor()
         
         // ViewにLabelを追加.
         self.view.addSubview(myLabel)
-        
-        // ---------
-        
-        // 背景色を黄色にする.
-        //self.view.backgroundColor = UIColor.yellowColor()
-        
-        // ProgressViewを作成する.
-        var myProgressView: UIProgressView = UIProgressView(frame: CGRectMake(0, 0, 200, 10))
-        myProgressView.progressTintColor = UIColor.greenColor()
-        myProgressView.trackTintColor = UIColor.whiteColor()
-        
-        // 座標を設定する.
-        myProgressView.layer.position = CGPoint(x: self.view.frame.width/2, y: 200)
-        
-        // バーの高さを設定する(横に1.0倍,縦に2.0倍).
-        myProgressView.transform = CGAffineTransformMakeScale(1.0, 10.0)
-        
-        // 進捗具合を設定する(0.0~1.0).
-        myProgressView.progress = 0.7
-        
-        // アニメーションを付ける.
-        myProgressView.setProgress(5.0, animated: true)
-        
-        // Viewに追加する.
-        self.view.addSubview(myProgressView)
-        
     }
-    
+
+    func showScoreBackView(){
+        
+        var syuchuImage : UIImage!
+        if scoreShowFlag > 0 {
+            syuchuImage = UIImage(named: "shuchu.png")
+        }else{
+            syuchuImage = UIImage(named: "shuchu2.png")
+        }
+
+        // UIImageViewを生成する.
+        var myImageView = UIImageView()
+        
+        // myImageViewのimageにmyImageを設定する.
+        myImageView.image = syuchuImage
+        
+        myImageView.alpha = 0.5
+        
+        // frameの値を設定する.
+        myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+        
+        self.view.addSubview(myImageView)
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
