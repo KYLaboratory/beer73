@@ -43,6 +43,7 @@
 		C733ACA61A1F777600AC7135 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		C733ACA81A1F7E7F00AC7135 /* beer73-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "beer73-Bridging-Header.h"; sourceTree = "<group>"; };
 		C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreCalculator.mm; sourceTree = "<group>"; };
+		C7EFDA451A201CAA00457625 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +68,7 @@
 		C71E25B71A1F5915008BEB06 = {
 			isa = PBXGroup;
 			children = (
+				C7EFDA451A201CAA00457625 /* .gitignore */,
 				C724E2271A1FBBB700DF4D84 /* opencv2.framework */,
 				C71E25C21A1F5915008BEB06 /* beer73 */,
 				C71E25D81A1F5915008BEB06 /* beer73Tests */,
