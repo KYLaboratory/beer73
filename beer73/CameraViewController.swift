@@ -19,10 +19,9 @@ class CameraViewController: UIViewController {
     // 画像のアウトプット.
     var myImageOutput : AVCaptureStillImageOutput!
     
-    var myVideoLayer : AVCaptureVideoPreviewLayer!
-    
-    var myButton : UIButton!
-    
+    var myImage : UIImage!
+    var score : Int32 = -1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -53,7 +52,7 @@ class CameraViewController: UIViewController {
         mySession.addOutput(myImageOutput)
         
         // 画像を表示するレイヤーを生成.
-        myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(mySession) as AVCaptureVideoPreviewLayer
+        let myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(mySession) as AVCaptureVideoPreviewLayer
         myVideoLayer.frame = self.view.bounds
         myVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
@@ -64,7 +63,7 @@ class CameraViewController: UIViewController {
         mySession.startRunning()
         
         // UIボタンを作成.
-        myButton = UIButton(frame: CGRectMake(0,0,120,50))
+        let myButton = UIButton(frame: CGRectMake(0,0,120,50))
         myButton.backgroundColor = UIColor.redColor();
         myButton.layer.masksToBounds = true
         myButton.setTitle("撮影", forState: .Normal)
@@ -84,6 +83,9 @@ class CameraViewController: UIViewController {
     //画面遷移
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "shutter") {
+            let resultViewControler: ResultViewController = segue.destinationViewController as ResultViewController
+            resultViewControler.cameraImage = myImage
+            resultViewControler.score = score
         }
     }
     
@@ -94,25 +96,44 @@ class CameraViewController: UIViewController {
         let myVideoConnection = myImageOutput.connectionWithMediaType(AVMediaTypeVideo)
         
         // 接続から画像を取得.
-        self.myImageOutput.captureStillImageAsynchronouslyFromConnection(myVideoConnection, completionHandler: { (imageDataBuffer, error) -> Void in
+        self.myImageOutput.captureStillImageAsynchronouslyFromConnection(myVideoConnection,
+            completionHandler:
+            {
+                (imageDataBuffer, error) -> Void in
             
-            // 取得したImageのDataBufferをJpegに変換.
-            let myImageData : NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer)
+                // 取得したImageのDataBufferをJpegに変換.
+                let myImageData : NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataBuffer)
+                
+                // JpegからUIIMageを作成.
+                self.myImage = UIImage(data: myImageData)!
+                
+                self.score = ScoreCalculator.calcScore(self.myImage)
             
-            // JpegからUIIMageを作成.
-            let myImage : UIImage = UIImage(data: myImageData)!
-            
-            ScoreCalculator.calcScore(myImage)
-            
-            // アルバムに追加.
-            //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
-            
-            //self.myButton.removeFromSuperview()
-            //self.myVideoLayer.removeFromSuperlayer()
-            
-            self.performSegueWithIdentifier("shutter",sender: nil)
-        })
-        
+                // アルバムに追加.
+                //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
+                
+                if self.score < 0
+                {
+                    // UIAlertControllerを作成する.
+                    let myAlert = UIAlertController(title: "認識エラー", message: "ビールが見えません！", preferredStyle: .Alert)
+                    
+                    // OKのアクションを作成する.
+                    let myOkAction = UIAlertAction(title: "撮り直す", style: .Default) { action in
+                        println("Action OK!!")
+                    }
+                    
+                    // OKのActionを追加する.
+                    myAlert.addAction(myOkAction)
+                    
+                    // UIAlertを発動する.
+                    self.presentViewController(myAlert, animated: true, completion: nil)
+                }
+                else
+                {
+                    self.performSegueWithIdentifier("shutter",sender: nil)
+                }
+            }
+        )
     }
 }
 
