@@ -11,7 +11,7 @@ import UIKit
 class ResultViewController : UIViewController {
     
     var cameraImage : UIImage!
-    var score = -1
+    var score : Int32 = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
