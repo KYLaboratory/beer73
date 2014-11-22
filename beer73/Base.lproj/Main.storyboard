@@ -40,8 +40,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="hJL-hh-0RJ" kind="unwind" identifier="back_to_camera" unwindAction="unwindSegueToCamera:" id="hzB-wN-nwn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWF-1e-o4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="hJL-hh-0RJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1139" y="56"/>
         </scene>

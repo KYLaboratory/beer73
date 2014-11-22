@@ -252,15 +252,7 @@ class ResultViewController : UIViewController {
     }
     
     func onClickMyButton(sender: UIButton){
-        
-        // 遷移するViewを定義.
-        let camViewController: UIViewController = CameraViewController()
-        
-        // アニメーションを設定.
-        camViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        
-        // Viewの移動.
-        self.presentViewController(camViewController, animated: true, completion: nil)
+        self.performSegueWithIdentifier("back_to_camera",sender: nil)
     }
     
     func onPostToTwitter(sender : AnyObject) {

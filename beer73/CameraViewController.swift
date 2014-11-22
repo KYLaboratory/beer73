@@ -78,6 +78,9 @@ class CameraViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        if mySession.running {
+            mySession.stopRunning()
+        }
     }
     
     //画面遷移
@@ -139,6 +142,10 @@ class CameraViewController: UIViewController {
                 self.performSegueWithIdentifier("shutter",sender: nil)
             }
         })
+    }
+    
+    @IBAction func unwindSegueToCamera(segue : UIStoryboardSegue){
+        
     }
 }
 
