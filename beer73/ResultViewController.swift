@@ -20,9 +20,10 @@ class ResultViewController : UIViewController {
     var scoreShowFlag : Int32 = 1
     var countUp : Int32 = 0
     
-    var myButtonBefore: UIButton!
+    var myButtonBefore : UIButton!
     var myComposeView : SLComposeViewController!
-    var myTwitterButton: UIButton!
+    var myTwitterButton : UIButton!
+    var myFacebookButton : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class ResultViewController : UIViewController {
         
         ///////////////////////////
         //cameraImage = UIImage(named: "beer.JPG")
-        score = 85;
+        //score = 85;
         
         // UIImageViewを生成する.
         var myImageView = UIImageView()
@@ -131,9 +132,7 @@ class ResultViewController : UIViewController {
         
         // Viewに追加する.
         self.view.addSubview(myProgressView)
-        
     }
-    
     
     func update() {
         // バーにアニメーションを付ける.
@@ -147,7 +146,7 @@ class ResultViewController : UIViewController {
         
         // Buttonポップアップ
         countUp++
-        if countUp > 7 {
+        if countUp > 5 {
             self.showButtons()
         }
     }
@@ -172,7 +171,7 @@ class ResultViewController : UIViewController {
         
         // Labelに文字を代入.
         let scoretext = score
-        myLabel.text = "\(scoretext) 点 death wwwwwww"
+        myLabel.text = "★★ \(scoretext) 点 ★★"
         
         // 文字の色を白にする.
         myLabel.textColor = UIColor.whiteColor()
@@ -184,7 +183,7 @@ class ResultViewController : UIViewController {
         myLabel.textAlignment = NSTextAlignment.Center
         
         // 配置する座標を設定する.
-        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
+        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2+30)
         
         // Viewの背景色を青にする.
         //self.view.backgroundColor = UIColor.cyanColor()
@@ -249,10 +248,21 @@ class ResultViewController : UIViewController {
         
         // buttonをviewに追加.
         self.view.addSubview(myTwitterButton)
+        
+        // Facebook用のUIButtonの生成.
+        myFacebookButton = UIButton(frame: CGRectMake(0, 0, 100, 100))
+        myFacebookButton.backgroundColor = UIColor.lightGrayColor()
+        myFacebookButton.setTitle("Facebook", forState: UIControlState.Normal)
+        myFacebookButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        myFacebookButton.addTarget(self, action: "postToFacebook:", forControlEvents: UIControlEvents.TouchUpInside)
+        myFacebookButton.layer.cornerRadius = 50.0
+        myFacebookButton.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.bounds.height-50)
+        
+        // buttonをviewに追加.
+        self.view.addSubview(myFacebookButton)
     }
     
     func onClickMyButton(sender: UIButton){
-        
         // 遷移するViewを定義.
         let camViewController: UIViewController = CameraViewController()
         
@@ -269,14 +279,30 @@ class ResultViewController : UIViewController {
         myComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         
         // 投稿するテキストを指定.
-        myComposeView.setInitialText("Twitter Test from Swift")
+        let scoretext = score
+        myComposeView.setInitialText("このビールは\(scoretext)点の出来栄えです!!")
         
         // 投稿する画像を指定.
-        myComposeView.addImage(UIImage(named: "beer.JPG"))
+        myComposeView.addImage(cameraImage)
         
         // myComposeViewの画面遷移.
         self.presentViewController(myComposeView, animated: true, completion: nil)
+    }
+    
+    // ボタンイベント.
+    func postToFacebook(sender : AnyObject) {
+        // postToTwitterと同様.
+        // ServiceTypeをFacebookに指定
+        myComposeView = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         
+        // 投稿するテキストを指定.
+        myComposeView.setInitialText("Facebook Test")
+        
+        // 投稿する画像を指定.
+        myComposeView.addImage(UIImage(named: "kura.jpg"))
+        
+        // myComposeViewの画面遷移.
+        self.presentViewController(myComposeView, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
