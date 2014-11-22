@@ -20,7 +20,7 @@ class CameraViewController: UIViewController {
     var myImageOutput : AVCaptureStillImageOutput!
     
     var myImage : UIImage!
-    var score : Int32 = -1
+    var score : Int32 = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +107,7 @@ class CameraViewController: UIViewController {
                 // JpegからUIIMageを作成.
                 self.myImage = UIImage(data: myImageData)!
                 
-                self.score = ScoreCalculator.calcScore(self.myImage)
+                //self.score = ScoreCalculator.calcScore(self.myImage)
             
                 // アルバムに追加.
                 //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
