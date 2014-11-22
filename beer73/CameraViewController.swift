@@ -20,7 +20,7 @@ class CameraViewController: UIViewController {
     var myImageOutput : AVCaptureStillImageOutput!
     
     var myImage : UIImage?
-    var score : Int32 = 100
+    var score : Int32 = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,7 +131,7 @@ class CameraViewController: UIViewController {
             
             // アルバムに追加.
             //UIImageWriteToSavedPhotosAlbum(myImage, self, nil, nil)
-            self.score = 100
+            //self.score = 100
             
             if self.score < 0
             {
