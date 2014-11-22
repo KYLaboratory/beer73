@@ -11,13 +11,8 @@ import UIKit
 import AVFoundation
 
 class CameraViewController: UIViewController {
-
-    // セッション.
-    var mySession : AVCaptureSession!
-    // デバイス.
-    var myDevice : AVCaptureDevice!
-    // 画像のアウトプット.
-    var myImageOutput : AVCaptureStillImageOutput!
+    
+    var camera : Camera!
     
     var myImage : UIImage!
     var score : Int32 = 100
@@ -26,33 +21,10 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // セッションの作成.
-        mySession = AVCaptureSession()
-        
-        // デバイス一覧の取得.
-        let devices = AVCaptureDevice.devices()
-        
-        // バックカメラをmyDeviceに格納.
-        for device in devices{
-            if(device.position == AVCaptureDevicePosition.Back){
-                myDevice = device as AVCaptureDevice
-            }
-        }
-        
-        // バックカメラからVideoInputを取得.
-        let videoInput = AVCaptureDeviceInput.deviceInputWithDevice(myDevice, error: nil) as AVCaptureDeviceInput
-        
-        // セッションに追加.
-        mySession.addInput(videoInput)
-        
-        // 出力先を生成.
-        myImageOutput = AVCaptureStillImageOutput()
-        
-        // セッションに追加.
-        mySession.addOutput(myImageOutput)
+        camera = Camera()
         
         // 画像を表示するレイヤーを生成.
-        let myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(mySession) as AVCaptureVideoPreviewLayer
+        let myVideoLayer = AVCaptureVideoPreviewLayer.layerWithSession(camera.mySession) as AVCaptureVideoPreviewLayer
         myVideoLayer.frame = self.view.bounds
         myVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
@@ -60,7 +32,7 @@ class CameraViewController: UIViewController {
         self.view.layer.addSublayer(myVideoLayer)
         
         // セッション開始.
-        mySession.startRunning()
+        camera.mySession.startRunning()
         
         // UIボタンを作成.
         let myButton = UIButton(frame: CGRectMake(0,0,120,50))
@@ -89,11 +61,32 @@ class CameraViewController: UIViewController {
         }
     }
     
+    func showAlert() {
+        if let gotModernAlert : AnyClass = NSClassFromString("UIAlertController") {
+            // UIAlertControllerを作成する.
+            let myAlert = UIAlertController(title: "認識エラー", message: "ビールが見えません！", preferredStyle: .Alert)
+            
+            // OKのアクションを作成する.
+            let myOkAction = UIAlertAction(title: "撮り直す", style: .Default) { action in
+                println("Action OK!!")
+            }
+            
+            // OKのActionを追加する.
+            myAlert.addAction(myOkAction)
+            
+            // UIAlertを発動する.
+            self.presentViewController(myAlert, animated: true, completion: nil)
+        } else {
+            let alertView : UIAlertView = UIAlertView(title: "認識エラー", message: "ビールが見えません！", delegate: nil, cancelButtonTitle: "撮り直す")
+            alertView.show()
+        }
+    }
+    
     // ボタンイベント.
     func onClickMyButton(sender: UIButton){
+        myImage = camera.captureImage()
         
-        // ビデオ出力に接続.
-        let myVideoConnection = myImageOutput.connectionWithMediaType(AVMediaTypeVideo)
+        self.score = ScoreCalculator.calcScore(self.myImage)
         
         // 接続から画像を取得.
         self.myImageOutput.captureStillImageAsynchronouslyFromConnection(myVideoConnection,
