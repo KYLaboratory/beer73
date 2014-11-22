@@ -31,7 +31,7 @@ class ResultViewController : UIViewController {
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
         ///////////////////////////
-        cameraImage = UIImage(named: "beer.JPG")
+        //cameraImage = UIImage(named: "beer.JPG")
         score = 85;
         
         // UIImageViewを生成する.
