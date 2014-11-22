@@ -251,9 +251,9 @@ class ResultViewController : UIViewController {
         
         // Facebook用のUIButtonの生成.
         myFacebookButton = UIButton(frame: CGRectMake(0, 0, 100, 100))
-        myFacebookButton.backgroundColor = UIColor.lightGrayColor()
+        myFacebookButton.backgroundColor = UIColor.blueColor()
         myFacebookButton.setTitle("Facebook", forState: UIControlState.Normal)
-        myFacebookButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+        myFacebookButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         myFacebookButton.addTarget(self, action: "postToFacebook:", forControlEvents: UIControlEvents.TouchUpInside)
         myFacebookButton.layer.cornerRadius = 50.0
         myFacebookButton.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.bounds.height-50)
@@ -263,14 +263,7 @@ class ResultViewController : UIViewController {
     }
     
     func onClickMyButton(sender: UIButton){
-        // 遷移するViewを定義.
-        let camViewController: UIViewController = CameraViewController()
-        
-        // アニメーションを設定.
-        camViewController.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        
-        // Viewの移動.
-        self.presentViewController(camViewController, animated: true, completion: nil)
+        self.performSegueWithIdentifier("back_to_camera",sender: nil)
     }
     
     func onPostToTwitter(sender : AnyObject) {
@@ -280,7 +273,7 @@ class ResultViewController : UIViewController {
         
         // 投稿するテキストを指定.
         let scoretext = score
-        myComposeView.setInitialText("このビールは\(scoretext)点の出来栄えです!!")
+        myComposeView.setInitialText("このビールの出来栄えは\(scoretext)点です!!")
         
         // 投稿する画像を指定.
         myComposeView.addImage(cameraImage)
@@ -296,10 +289,11 @@ class ResultViewController : UIViewController {
         myComposeView = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
         
         // 投稿するテキストを指定.
-        myComposeView.setInitialText("Facebook Test")
+        let scoretext = score
+        myComposeView.setInitialText("このビールの出来栄えは\(scoretext)点です!!")
         
         // 投稿する画像を指定.
-        myComposeView.addImage(UIImage(named: "kura.jpg"))
+        myComposeView.addImage(cameraImage)
         
         // myComposeViewの画面遷移.
         self.presentViewController(myComposeView, animated: true, completion: nil)
