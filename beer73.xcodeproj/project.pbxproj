@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A75C4A321A20263A0045A9E8 /* beer.JPG in Resources */ = {isa = PBXBuildFile; fileRef = A75C4A311A20263A0045A9E8 /* beer.JPG */; };
+		A75C4A361A206BA20045A9E8 /* shuchu.png in Resources */ = {isa = PBXBuildFile; fileRef = A75C4A351A206BA20045A9E8 /* shuchu.png */; };
+		A75C4A381A206E730045A9E8 /* shuchu2.png in Resources */ = {isa = PBXBuildFile; fileRef = A75C4A371A206E730045A9E8 /* shuchu2.png */; };
 		C71E25C61A1F5915008BEB06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25C51A1F5915008BEB06 /* AppDelegate.swift */; };
 		C71E25C81A1F5915008BEB06 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25C71A1F5915008BEB06 /* CameraViewController.swift */; };
 		C71E25CB1A1F5915008BEB06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E25C91A1F5915008BEB06 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		A75C4A311A20263A0045A9E8 /* beer.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beer.JPG; sourceTree = "<group>"; };
+		A75C4A351A206BA20045A9E8 /* shuchu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuchu.png; sourceTree = "<group>"; };
+		A75C4A371A206E730045A9E8 /* shuchu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuchu2.png; sourceTree = "<group>"; };
 		C71E25C01A1F5915008BEB06 /* beer73.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = beer73.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71E25C41A1F5915008BEB06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C71E25C51A1F5915008BEB06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 		C71E25B71A1F5915008BEB06 = {
 			isa = PBXGroup;
 			children = (
+				A75C4A371A206E730045A9E8 /* shuchu2.png */,
+				A75C4A351A206BA20045A9E8 /* shuchu.png */,
 				A75C4A311A20263A0045A9E8 /* beer.JPG */,
 				C7EFDA451A201CAA00457625 /* .gitignore */,
 				C724E2271A1FBBB700DF4D84 /* opencv2.framework */,
@@ -212,10 +218,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75C4A381A206E730045A9E8 /* shuchu2.png in Resources */,
 				C71E25CB1A1F5915008BEB06 /* Main.storyboard in Resources */,
 				A75C4A321A20263A0045A9E8 /* beer.JPG in Resources */,
 				C71E25D01A1F5915008BEB06 /* LaunchScreen.xib in Resources */,
 				C71E25CD1A1F5915008BEB06 /* Images.xcassets in Resources */,
+				A75C4A361A206BA20045A9E8 /* shuchu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

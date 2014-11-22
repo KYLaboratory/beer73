@@ -16,17 +16,16 @@ class ResultViewController : UIViewController {
     var myProgressView : UIProgressView!
     var pernum : Float32 = 0.0;
     
-    // 画像を設定する.
-    //var cameraImage = UIImage(named: "beer.JPG")
-
-    // ImageViewを.定義する.
-    //var myImageView: UIImageView!
+    var scoreShowFlag : Int32 = 1
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // timer 最初の引数でスピード決定する
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("update"), userInfo: nil, repeats: true)
         
+        ///////////////////////////
         cameraImage = UIImage(named: "beer.JPG")
         score = 85;
         
@@ -101,43 +100,9 @@ class ResultViewController : UIViewController {
         
         // Viewに追加する.
         self.view.addSubview(myReverseView)
-        
+        */
         // -----
         
-        // Labelを作成.
-        let myLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
-
-        // 背景をオレンジ色にする.
-        myLabel.backgroundColor = UIColor.orangeColor()
-        
-        // 枠を丸くする.
-        myLabel.layer.masksToBounds = true
-        
-        // コーナーの半径.
-        myLabel.layer.cornerRadius = 20.0
-        
-        // Labelに文字を代入.
-        let scoretext = score
-        myLabel.text = "\(scoretext) 点 wwwww"
-        
-        // 文字の色を白にする.
-        myLabel.textColor = UIColor.whiteColor()
-        
-        // 文字の影の色をグレーにする.
-        myLabel.shadowColor = UIColor.grayColor()
-        
-        // Textを中央寄せにする.
-        myLabel.textAlignment = NSTextAlignment.Center
-        
-        // 配置する座標を設定する.
-        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2,y: 200)
-        
-        // Viewの背景色を青にする.
-        self.view.backgroundColor = UIColor.cyanColor()
-        
-        // ViewにLabelを追加.
-        self.view.addSubview(myLabel)
-        */
         
         // ---------
         
@@ -170,7 +135,74 @@ class ResultViewController : UIViewController {
         if( Float32(score) * 0.01 > pernum ){
             pernum += Float32(score) * 0.01;
             myProgressView.setProgress(pernum, animated: true)
+        }else{
+            self.showScore()
+            scoreShowFlag *= -1
         }
+    }
+
+    func showScore(){
+        self.showScoreLabel()
+        self.showScoreBackView()
+    }
+    
+    func showScoreLabel(){
+        // Labelを作成.
+        let myLabel: UILabel = UILabel(frame: CGRectMake(0,0,200,50))
+        
+        // 背景をオレンジ色にする.
+        myLabel.backgroundColor = UIColor.orangeColor()
+        
+        // 枠を丸くする.
+        myLabel.layer.masksToBounds = true
+        
+        // コーナーの半径.
+        myLabel.layer.cornerRadius = 20.0
+        
+        // Labelに文字を代入.
+        let scoretext = score
+        myLabel.text = "\(scoretext) 点 death wwwwwww"
+        
+        // 文字の色を白にする.
+        myLabel.textColor = UIColor.whiteColor()
+        
+        // 文字の影の色をグレーにする.
+        myLabel.shadowColor = UIColor.grayColor()
+        
+        // Textを中央寄せにする.
+        myLabel.textAlignment = NSTextAlignment.Center
+        
+        // 配置する座標を設定する.
+        myLabel.layer.position = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
+        
+        // Viewの背景色を青にする.
+        //self.view.backgroundColor = UIColor.cyanColor()
+        
+        // ViewにLabelを追加.
+        self.view.addSubview(myLabel)
+    }
+
+    func showScoreBackView(){
+        
+        var syuchuImage : UIImage!
+        if scoreShowFlag > 0 {
+            syuchuImage = UIImage(named: "shuchu.png")
+        }else{
+            syuchuImage = UIImage(named: "shuchu2.png")
+        }
+
+        // UIImageViewを生成する.
+        var myImageView = UIImageView()
+        
+        // myImageViewのimageにmyImageを設定する.
+        myImageView.image = syuchuImage
+        
+        myImageView.alpha = 0.5
+        
+        // frameの値を設定する.
+        myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+        
+        self.view.addSubview(myImageView)
     }
 
     override func didReceiveMemoryWarning() {
