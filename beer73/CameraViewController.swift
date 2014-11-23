@@ -78,9 +78,9 @@ class CameraViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        if mySession.running {
-            mySession.stopRunning()
-        }
+        //if mySession.running {
+          //  mySession.stopRunning()
+        //`}
     }
     
     //画面遷移
