@@ -6,5 +6,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ScoreCalculator : NSObject
-+(int)calcScore:(UIImage*)image;
++(int)calcScore:(const UIImage*)image;
 @end
