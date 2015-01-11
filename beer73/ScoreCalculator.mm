@@ -46,5 +46,6 @@
     
     return std::max((int)((-1.0 / 9.0) * pow((compbeer - 70), 2.0) + 100), 0);
 }
+//test
 
 @end
