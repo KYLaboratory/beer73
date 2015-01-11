@@ -37,12 +37,13 @@ class ResultViewController : UIViewController {
         
         // UIImageViewを生成する.
         var myImageView = UIImageView()
-        
-        // myImageViewのimageにmyImageを設定する.
-        myImageView.image = cameraImage
+        myImageView.contentMode = UIViewContentMode.ScaleAspectFit
    
         // frameの値を設定する.
         myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+        
+        // myImageViewのimageにmyImageを設定する.
+        myImageView.image = cameraImage
         
         self.view.addSubview(myImageView)
   
