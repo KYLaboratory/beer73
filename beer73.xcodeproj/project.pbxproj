@@ -13,13 +13,13 @@
 		C71E25C61A1F5915008BEB06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25C51A1F5915008BEB06 /* AppDelegate.swift */; };
 		C71E25C81A1F5915008BEB06 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25C71A1F5915008BEB06 /* CameraViewController.swift */; };
 		C71E25CB1A1F5915008BEB06 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C71E25C91A1F5915008BEB06 /* Main.storyboard */; };
-		C71E25CD1A1F5915008BEB06 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C71E25CC1A1F5915008BEB06 /* Images.xcassets */; };
 		C71E25D01A1F5915008BEB06 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71E25CE1A1F5915008BEB06 /* LaunchScreen.xib */; };
 		C71E25DC1A1F5915008BEB06 /* beer73Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71E25DB1A1F5915008BEB06 /* beer73Tests.swift */; };
 		C724E2281A1FBBB700DF4D84 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C724E2271A1FBBB700DF4D84 /* opencv2.framework */; };
 		C7322B391A590B390057991D /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7322B381A590B390057991D /* iAd.framework */; };
 		C733ACA71A1F777600AC7135 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C733ACA61A1F777600AC7135 /* ResultViewController.swift */; };
 		C733ACAA1A1F7E8000AC7135 /* ScoreCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */; };
+		C7635A651A8B96EC000B4723 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7635A641A8B96EC000B4723 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,6 @@
 		C71E25C51A1F5915008BEB06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C71E25C71A1F5915008BEB06 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		C71E25CA1A1F5915008BEB06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C71E25CC1A1F5915008BEB06 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C71E25CF1A1F5915008BEB06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C71E25D51A1F5915008BEB06 /* beer73Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = beer73Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C71E25DA1A1F5915008BEB06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		C733ACA61A1F777600AC7135 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		C733ACA81A1F7E7F00AC7135 /* beer73-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "beer73-Bridging-Header.h"; sourceTree = "<group>"; };
 		C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScoreCalculator.mm; sourceTree = "<group>"; };
+		C7635A641A8B96EC000B4723 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C7EFDA451A201CAA00457625 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,12 +104,12 @@
 				C71E25C51A1F5915008BEB06 /* AppDelegate.swift */,
 				C71E25C71A1F5915008BEB06 /* CameraViewController.swift */,
 				C71E25C91A1F5915008BEB06 /* Main.storyboard */,
-				C71E25CC1A1F5915008BEB06 /* Images.xcassets */,
 				C71E25CE1A1F5915008BEB06 /* LaunchScreen.xib */,
 				C71E25C31A1F5915008BEB06 /* Supporting Files */,
 				C733ACA61A1F777600AC7135 /* ResultViewController.swift */,
 				C733ACA91A1F7E8000AC7135 /* ScoreCalculator.mm */,
 				C733ACA81A1F7E7F00AC7135 /* beer73-Bridging-Header.h */,
+				C7635A641A8B96EC000B4723 /* Images.xcassets */,
 			);
 			path = beer73;
 			sourceTree = "<group>";
@@ -223,8 +223,8 @@
 				A75C4A381A206E730045A9E8 /* shuchu2.png in Resources */,
 				C71E25CB1A1F5915008BEB06 /* Main.storyboard in Resources */,
 				A75C4A321A20263A0045A9E8 /* beer.JPG in Resources */,
+				C7635A651A8B96EC000B4723 /* Images.xcassets in Resources */,
 				C71E25D01A1F5915008BEB06 /* LaunchScreen.xib in Resources */,
-				C71E25CD1A1F5915008BEB06 /* Images.xcassets in Resources */,
 				A75C4A361A206BA20045A9E8 /* shuchu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
