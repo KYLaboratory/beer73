@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import Spritekit
 import Social
 
 class ResultViewController : UIViewController {
@@ -153,7 +154,8 @@ class ResultViewController : UIViewController {
         countUp++
         countUp2++
         
-        //if countUp <= 3{
+        if countUp <= 3{
+        
         /******************************************************************************************************************/
         // Labelを作成.
         let myLabelbub: UILabel = UILabel(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height/3))
@@ -185,11 +187,41 @@ class ResultViewController : UIViewController {
         
           // ViewにLabelを追加.
           self.view.addSubview(myLabelbeer)
+
+        
+        }
+        
+        
+        /*
+            /*******************************************************************************************/
+            
+            
+            //let box:SKSpriteNode = SKSpriteNode(color:SKColor.blueColor(), size:CGSizeMake(200, 200))
+            //box.position = CGPointMake(self.view.bounds.width/2.0, self.view.bounds.height/2.0)
+            //addChild(box)
+            
+            let view:SKView = SKView(frame: CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height))
+            
+            // PlaygroundのTimelineに表示
+            
+            
+            // シーンを生成、背景を黒にしてビューに追加
+            let scene:SKScene = SKScene(size: CGSizeMake(self.view.bounds.width, self.view.bounds.height))
+            scene.backgroundColor = SKColor.blackColor();
+            view.presentScene(scene)
+            
+            // 青い四角を追加
+            let box:SKSpriteNode = SKSpriteNode(color:SKColor.blueColor(), size:CGSizeMake(200, 200))
+            box.position = CGPointMake(self.view.bounds.width/2.0, self.view.bounds.height/2.0)
+            scene.addChild(box)
+            
          /*******************************************************************************************/
+        */
+        
         // Labelを作成.
         let myLabelcount: UILabel = UILabel(frame: CGRectMake(0,0,100,100))
         
-        // 背景をオレンジ色にする.
+        // 背景を白色にする.
         myLabelcount.backgroundColor = UIColor.whiteColor()
         
         // 枠を丸くする.
@@ -204,7 +236,7 @@ class ResultViewController : UIViewController {
         
         myLabelcount.font = UIFont.systemFontOfSize(CGFloat(50))
         
-        // 文字の色を白にする.
+        // 文字の色を黒にする.
         myLabelcount.textColor = UIColor.blackColor()
         
         // 文字の影の色をグレーにする.
