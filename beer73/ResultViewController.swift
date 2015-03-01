@@ -154,6 +154,24 @@ class ResultViewController : UIViewController {
         countUp2++
         
         //if countUp <= 3{
+        /******************************************************************************************************************/
+        // Labelを作成.
+        let myLabelbub: UILabel = UILabel(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height/3))
+        
+        // 背景色設定.
+        myLabelbub.backgroundColor = UIColor.whiteColor()
+        
+        
+        // 配置する座標を設定する.
+        myLabelbub.layer.position = CGPoint(x: self.view.bounds.width/2,y: self.view.bounds.height/6)
+        
+        
+        // ViewにLabelを追加.
+        self.view.addSubview(myLabelbub)
+        
+        /******************************************************************************************************************/
+        
+        
           // Labelを作成.
           let myLabelbeer: UILabel = UILabel(frame: CGRectMake(0,0,self.view.bounds.width,self.view.bounds.height))
         
