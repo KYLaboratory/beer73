@@ -7,4 +7,5 @@
 
 @interface ScoreCalculator : NSObject
 +(int)calcScore:(const UIImage*)image;
++(UIImage*)getProcessImage:(UIImage*)image;
 @end

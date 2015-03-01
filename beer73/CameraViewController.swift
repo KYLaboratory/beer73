@@ -84,6 +84,11 @@ class CameraViewController: UIViewController {
             // JpegからUIIMageを作成.
             self.myImage = UIImage(data: myImageData)
             
+            // for debug sumi
+            // for debug sumi
+            // for debug sumi
+            //self.myImage = ScoreCalculator.getProcessImage(self.myImage);
+            
             self.score = ScoreCalculator.calcScore(self.myImage)
             
             if self.score < 0
