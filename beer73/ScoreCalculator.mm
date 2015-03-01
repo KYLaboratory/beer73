@@ -12,10 +12,6 @@
 
 @implementation ScoreCalculator : NSObject
 
-// ビール認識が必要かも
-// ブラーでぼかした画像にて、ビールらしいところを発見後
-// その内部で処理した方が、泡のカウントが安定しそうなので考える
-
 +(int)calcScore:(const UIImage*)image
 {
     cv::Mat rgbImage, dstImg;
@@ -63,10 +59,15 @@
         }
     }
     
+    NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
+              
     //if(countbeer + countbubble == 0){
     //if(countbeer2 + countbubble2 == 0){
-    if(countbeer3 + countbubble3 == 0){
-        return 0;
+    if( countbeer3 + countbubble3 < 5000  // 計算に適した数の点数が得られていないとき
+       || countbeer3 / countbubble3 < 0.5 // 比率があまりにも悪いときを排除
+       || countbeer3 == 0.0
+       || countbubble3 == 0.0){
+        return -1;
     }
     
     double compbeer = (countbeer / (double)(countbeer + countbubble)) * 100;
