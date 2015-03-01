@@ -18,6 +18,12 @@ class CameraViewController: UIViewController {
     var myImageOutput : AVCaptureStillImageOutput!
     var myImage : UIImage?
     
+    let photoButton = UIButton()
+    
+    let infoWindow = UIView()
+    let infoOpenButton = UIButton.buttonWithType(UIButtonType.InfoDark) as UIButton
+    let infoCloseButton = UIButton()
+    
     var score : Int32 = -1 // -1はエラー
     
     override func viewDidLoad() {
@@ -40,14 +46,45 @@ class CameraViewController: UIViewController {
         mySession.startRunning()
         
         // 撮影ボタンを生成してviewに追加
-        let myButton = UIButton(frame: CGRectMake(0,0,120,50))
-        myButton.backgroundColor = UIColor.redColor()
-        myButton.layer.masksToBounds = true
-        myButton.setTitle("撮影", forState: .Normal)
-        myButton.layer.cornerRadius = 20.0
-        myButton.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.bounds.height-100)
-        myButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(myButton)
+        photoButton.frame = CGRectMake(0,0,120,50)
+        photoButton.backgroundColor = UIColor.redColor()
+        photoButton.layer.masksToBounds = true
+        photoButton.setTitle("撮影", forState: .Normal)
+        photoButton.layer.cornerRadius = 20.0
+        photoButton.layer.position = CGPoint(x: self.view.bounds.width/2, y:self.view.bounds.height-100)
+        photoButton.addTarget(self, action: "onClickMyButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(photoButton)
+        
+        // 説明ボタンを追加
+        infoOpenButton.layer.position = CGPoint(x: self.view.frame.width - 30, y: 45);
+        infoOpenButton.addTarget(self, action: "onClickInfoButton:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(infoOpenButton)
+        
+        infoWindow.frame = CGRectMake(10, self.view.frame.height / 2 - 150, self.view.frame.width - 25, 250)
+        infoWindow.backgroundColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5)
+        infoWindow.layer.masksToBounds = true
+        infoWindow.layer.cornerRadius = 20.0
+        infoWindow.layer.borderWidth = 2
+        infoWindow.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        infoCloseButton.frame = CGRectMake(0,0,120,50)
+        infoCloseButton.backgroundColor = UIColor.orangeColor()
+        infoCloseButton.setTitle("閉じる", forState: .Normal)
+        infoCloseButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        infoCloseButton.layer.masksToBounds = true
+        infoCloseButton.layer.cornerRadius = 20.0
+        infoCloseButton.layer.position = CGPointMake(self.infoWindow.frame.width / 2, self.infoWindow.frame.height - 30)
+        infoCloseButton.addTarget(self, action: "onClickInfoCloseButton:", forControlEvents: .TouchUpInside)
+        self.infoWindow.addSubview(infoCloseButton)
+        
+        let infoTextView : UITextView = UITextView(frame: CGRectMake(10, 10, self.infoWindow.frame.width - 20, self.infoWindow.frame.height - 70))
+        infoTextView.backgroundColor = UIColor.clearColor()
+        infoTextView.text = "ここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れます"
+        infoTextView.font = UIFont.systemFontOfSize(CGFloat(20))
+        infoTextView.textColor = UIColor.whiteColor()
+        infoTextView.textAlignment = NSTextAlignment.Natural
+        infoTextView.editable = false
+        self.infoWindow.addSubview(infoTextView)
         
         self.canDisplayBannerAds = true
     }
@@ -100,6 +137,21 @@ class CameraViewController: UIViewController {
                 self.performSegueWithIdentifier("shutter",sender: nil)
             }
         })
+    }
+    
+    func onClickInfoButton(sender: UIButton){
+        infoOpenButton.enabled = false
+        photoButton.enabled = false
+        photoButton.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(infoWindow)
+    }
+    
+    func onClickInfoCloseButton(sender: UIButton){
+        infoWindow.removeFromSuperview()
+        infoOpenButton.enabled = true
+        photoButton.backgroundColor = UIColor.redColor()
+        photoButton.enabled = true
     }
     
     func showAlert() {
