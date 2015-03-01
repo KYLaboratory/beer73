@@ -46,7 +46,6 @@ class ResultViewController : UIViewController {
         
         // myImageViewのimageにmyImageを設定する.
         
-        
         myImageView.image = cameraImage
         
         self.view.addSubview(myImageView)
