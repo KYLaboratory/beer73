@@ -468,6 +468,19 @@ class ResultViewController : UIViewController {
         myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
         
         self.view.addSubview(myImageView)
+        
+        // 削除
+        // 現状、集中線以外のオブジェクトがたぶん１０個くらいある
+        var subviews = self.view.subviews
+        var count = 0
+        for subview in subviews {
+            subview.removeFromSuperview()
+            count++
+
+            if(subviews.count - 10 == count){
+                break;
+            }
+        }
     }
     
     func showButtons(){
