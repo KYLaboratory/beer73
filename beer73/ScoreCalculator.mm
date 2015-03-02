@@ -65,8 +65,8 @@
     //if(countbeer2 + countbubble2 == 0){
     if( countbeer3 + countbubble3 < 5000  // 計算に適した数の点数が得られていないとき
        || countbeer3 / countbubble3 < 0.5 // 比率があまりにも悪いときを排除
-       || countbeer3 == 0.0
-       || countbubble3 == 0.0){
+       || countbeer3 <= 500.0
+       || countbubble3 <= 500.0){
         return -1;
     }
     
