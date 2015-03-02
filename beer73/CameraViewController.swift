@@ -79,7 +79,7 @@ class CameraViewController: UIViewController {
         
         let infoTextView : UITextView = UITextView(frame: CGRectMake(10, 10, self.infoWindow.frame.width - 20, self.infoWindow.frame.height - 70))
         infoTextView.backgroundColor = UIColor.clearColor()
-        infoTextView.text = "ここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れますここに説明を入れます"
+        infoTextView.text = "ビールを撮って、ビールと泡の７：３具合を判定しましょう！\nビールが画面いっぱいに大きく写るように、正面から、なるべく明るい場所で撮影してください。"
         infoTextView.font = UIFont.systemFontOfSize(CGFloat(20))
         infoTextView.textColor = UIColor.whiteColor()
         infoTextView.textAlignment = NSTextAlignment.Natural
