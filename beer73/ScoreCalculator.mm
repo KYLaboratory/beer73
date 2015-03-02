@@ -30,10 +30,10 @@
     cv::Mat hsvImage;
     cv::cvtColor(dstImg, hsvImage, CV_RGB2HSV);
     
-    int countbeer = 0;
-    int countbubble = 0;
-    double countbeer2 = 0;
-    double countbubble2 = 0;
+    //int countbeer = 0;
+    //int countbubble = 0;
+    //double countbeer2 = 0;
+    //double countbubble2 = 0;
     double countbeer3 = 0;
     double countbubble3 = 0;
     
@@ -46,20 +46,20 @@
             double val = hsvImage.data[j * hsvImage.step + i + 2] / 255.0;
         
             if(20.0 <= hue && hue <= 60.0 && sat >= 0.35 && val >= 0.35){
-                countbeer++;
+                //countbeer++;
                 // 画像中心付近のデータに重みをつける
-                countbeer2 += 1.0 - abs(i - half_width) / half_width;
+                //countbeer2 += 1.0 - abs(i - half_width) / half_width;
                 countbeer3 += 1.0 - sin(M_PI_2 * abs(i - half_width) / half_width);
             }else if(0.15 > sat && 0.7 < val){
-                countbubble++;
+                //countbubble++;
                 // 画像中心付近のデータに重みをつける
-                countbubble2 += 1.0 - abs(i - half_width) / half_width;
+                //countbubble2 += 1.0 - abs(i - half_width) / half_width;
                 countbubble3 += 1.0 - sin(M_PI_2 * abs(i - half_width) / half_width);
             }
         }
     }
     
-    NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
+    //NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
               
     //if(countbeer + countbubble == 0){
     //if(countbeer2 + countbubble2 == 0){
@@ -70,14 +70,14 @@
         return -1;
     }
     
-    double compbeer = (countbeer / (double)(countbeer + countbubble)) * 100;
-    double compbeer2 = (countbeer2 / (double)(countbeer2 + countbubble2)) * 100;
+    //double compbeer = (countbeer / (double)(countbeer + countbubble)) * 100;
+    //double compbeer2 = (countbeer2 / (double)(countbeer2 + countbubble2)) * 100;
     double compbeer3 = (countbeer3 / (double)(countbeer3 + countbubble3)) * 100;
     
-    NSLog(@"beer %d bubble %d score %lf\n", countbeer, countbubble, compbeer);
-    NSLog(@"beer %lf bubble %lf score %lf\n", countbeer2, countbubble2, compbeer2);
+    //NSLog(@"beer %d bubble %d score %lf\n", countbeer, countbubble, compbeer);
+    //NSLog(@"beer %lf bubble %lf score %lf\n", countbeer2, countbubble2, compbeer2);
     NSLog(@"beer %lf bubble %lf score %lf\n", countbeer3, countbubble3, compbeer3);
-    NSLog(@"width %d height %d\n", rgbImage.cols, rgbImage.rows);
+    //NSLog(@"width %d height %d\n", rgbImage.cols, rgbImage.rows);
     
     //return std::max((int)((-1.0 / 9.0) * pow((compbeer - 70), 2.0) + 100), 0);
     //return std::max((int)((-1.0 / 9.0) * pow((compbeer2 - 70), 2.0) + 100), 0);
