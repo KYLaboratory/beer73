@@ -30,14 +30,30 @@
     cv::Mat hsvImage;
     cv::cvtColor(dstImg, hsvImage, CV_RGB2HSV);
     
-    //int countbeer = 0;
-    //int countbubble = 0;
+    int countbeer = 0;
+    int countbubble = 0;
     //double countbeer2 = 0;
     //double countbubble2 = 0;
     double countbeer3 = 0;
     double countbubble3 = 0;
+
+    int half_width = hsvImage.cols / 2; // iPhoneを縦向きに使ったときの、横方向の画素の中心の意味
+    int half_height = hsvImage.rows / 2; // iPhoneを縦向きに使ったときの、縦方向の画素の中心の意味
     
-    double half_width = hsvImage.cols / 2; // iPhoneを縦向きに使ったときの、横方向の画素の中心の意味
+    double hhue = 0;
+    double hsat = 0;
+    double hval = 0;
+    int buff = 0;
+    for(int j = half_height - buff; j <= half_height + buff; j++){
+        for(int i = half_width - buff; i <= half_width + buff; i++){
+            hhue += hsvImage.data[j * hsvImage.step + i + 0] * 2.0;
+            hsat += hsvImage.data[j * hsvImage.step + i + 1] / 255.0;
+            hval += hsvImage.data[j * hsvImage.step + i + 2] / 255.0;
+        }
+    }
+    hhue = hhue / (buff*buff + 1);
+    hsat = hsat / (buff*buff + 1);
+    hval = hval / (buff*buff + 1);
 
     for(int j = 0; j < hsvImage.rows; j++){
         for(int i = 0; i < hsvImage.cols; i++){
@@ -45,13 +61,14 @@
             double sat = hsvImage.data[j * hsvImage.step + i + 1] / 255.0;
             double val = hsvImage.data[j * hsvImage.step + i + 2] / 255.0;
         
-            if(20.0 <= hue && hue <= 60.0 && sat >= 0.35 && val >= 0.35){
-                //countbeer++;
+            //if(20.0 <= hue && hue <= 60.0 && sat >= 0.35 && val >= 0.35){
+            if( fabs(hhue - 10.0) <= hue && hue <= hhue + 10.0 && fabs(hsat - 0.1) <= sat && val >= fabs(hval - 0.1) ){
+                countbeer++;
                 // 画像中心付近のデータに重みをつける
                 //countbeer2 += 1.0 - abs(i - half_width) / half_width;
                 countbeer3 += 1.0 - sin(M_PI_2 * abs(i - half_width) / half_width);
             }else if(0.15 > sat && 0.7 < val){
-                //countbubble++;
+                countbubble++;
                 // 画像中心付近のデータに重みをつける
                 //countbubble2 += 1.0 - abs(i - half_width) / half_width;
                 countbubble3 += 1.0 - sin(M_PI_2 * abs(i - half_width) / half_width);
@@ -59,14 +76,15 @@
         }
     }
     
-    //NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
+    NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
+    NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
               
     //if(countbeer + countbubble == 0){
     //if(countbeer2 + countbubble2 == 0){
     if( countbeer3 + countbubble3 < 5000  // 計算に適した数の点数が得られていないとき
        || countbeer3 / countbubble3 < 0.5 // 比率があまりにも悪いときを排除
        || countbeer3 <= 500.0
-       || countbubble3 <= 500.0){
+       || countbubble3 <= 10.0){
         return -1;
     }
     
