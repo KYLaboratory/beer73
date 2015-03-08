@@ -51,9 +51,11 @@
             hval += hsvImage.data[j * hsvImage.step + i + 2] / 255.0;
         }
     }
-    hhue = hhue / (buff*buff + 1);
-    hsat = hsat / (buff*buff + 1);
-    hval = hval / (buff*buff + 1);
+    NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
+
+    hhue = hhue / ((buff * 2 + 1) * (buff * 2 + 1));
+    hsat = hsat / ((buff * 2 + 1) * (buff * 2 + 1));
+    hval = hval / ((buff * 2 + 1) * (buff * 2 + 1));
 
     for(int j = 0; j < hsvImage.rows; j++){
         for(int i = 0; i < hsvImage.cols; i++){

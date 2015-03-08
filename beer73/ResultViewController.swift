@@ -358,7 +358,7 @@ class ResultViewController : UIViewController {
             myImageView.contentMode = UIViewContentMode.ScaleAspectFit
             
             // frameの値を設定する.
-            myImageView.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+            myImageView.frame = CGRectMake(0, 0, self.view.bounds.width + 1, self.view.bounds.height)
             
             // myImageViewのimageにmyImageを設定する.
             
