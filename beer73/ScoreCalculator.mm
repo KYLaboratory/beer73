@@ -51,7 +51,7 @@
             hval += hsvImage.data[j * hsvImage.step + i + 2] / 255.0;
         }
     }
-    NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
+    //NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
 
     hhue = hhue / ((buff * 2 + 1) * (buff * 2 + 1));
     hsat = hsat / ((buff * 2 + 1) * (buff * 2 + 1));
@@ -78,8 +78,8 @@
         }
     }
     
-    NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
-    NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
+    //NSLog(@"hhue %lf hsat %lf hval %lf\n", hhue, hsat, hval);
+    //NSLog(@"beer %d bubble %d\n", countbeer, countbubble);
               
     //if(countbeer + countbubble == 0){
     //if(countbeer2 + countbubble2 == 0){
@@ -96,7 +96,7 @@
     
     //NSLog(@"beer %d bubble %d score %lf\n", countbeer, countbubble, compbeer);
     //NSLog(@"beer %lf bubble %lf score %lf\n", countbeer2, countbubble2, compbeer2);
-    NSLog(@"beer %lf bubble %lf score %lf\n", countbeer3, countbubble3, compbeer3);
+    //NSLog(@"beer %lf bubble %lf score %lf\n", countbeer3, countbubble3, compbeer3);
     //NSLog(@"width %d height %d\n", rgbImage.cols, rgbImage.rows);
     
     //return std::max((int)((-1.0 / 9.0) * pow((compbeer - 70), 2.0) + 100), 0);
